@@ -35,4 +35,4 @@ penguins %>%
        y = " Bill length (mm)"
   ) 
 +
-  ggsave("figures/fig01_report.png")
+  ggsave("figures/scatter_plot.png")
