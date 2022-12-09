@@ -1,9 +1,12 @@
+# Load libraries for the packages needed
 library(palmerpenguins)
 library(ragg)
 
+# Set working directory 
 choose.files()
 setwd("C:\\Users\\44746\\Documents\\Year 3\\Research skills")
 
+# This function below cleans the data to make it more easible readible by r
 cleaning <- function(data_raw){
   data_raw %>%
     clean_names() %>%
@@ -12,17 +15,21 @@ cleaning <- function(data_raw){
     select(-comments)
 }
 
+# This function below removes individuals that have NA entries 
 remove_empty_flipper_length <- function(data_clean){
   data_clean %>%
     filter(!is.na(flipper_length_mm)) %>%
     select(species, flipper_length_mm)
 }
 
+# Performing a linear regression between flipper length and body mass 
 statistical_test <- lm(flipper_length_mm ~ body_mass_g, data=penguins)
 
+# Generating estimates for slope and intercept from the linear regression
 statistical_test$coefficients[1]
 statistical_test$coefficients[2]
 
+# Generating a scatter plot with the regression line overlain and then saving the plot produced
 penguins %>%
   ggplot(aes(body_mass_g, flipper_length_mm))+
   geom_point()+
